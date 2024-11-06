@@ -8,7 +8,25 @@ import ContestDetails from './components/ContestDetails';
 import Participate from './components/Participate';
 import Submit from './components/Submit';
 
+import { useEffect } from 'react';
+import { initializeContract } from './contractIntegration';
+
+
 function App() {
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        await initializeContract();
+      } catch (error) {
+        console.error('Failed to initialize contract:', error);
+        alert('Failed to connect to Ethereum network. Please make sure you have MetaMask installed and connected.');
+      }
+    };
+    init();
+  }, []);
+
+
   return (
     <Router>
       <div className="App">

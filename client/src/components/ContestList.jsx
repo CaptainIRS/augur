@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { getContestsCount, getContestDetails } from '../contractIntegration';
+
 
 function ContestList() {
   const [contests, setContests] = useState([]);
 
   useEffect(() => {
+    // const fetchContests = async () => {
+    //   try {
+    //     const response = await axios.get('/api/contests');
+    //     setContests(response.data);
+    //   } catch (error) {
+    //     console.error('Error fetching contests:', error);
+    //   }
+    // };
+
     const fetchContests = async () => {
       try {
-        const response = await axios.get('/api/contests');
-        setContests(response.data);
+        const count = await getContestsCount();
+        const contestsData = await Promise.all(
+          Array.from({ length: count }, (_, i) => getContestDetails(i))
+        );
+        setContests(contestsData);
       } catch (error) {
         console.error('Error fetching contests:', error);
       }

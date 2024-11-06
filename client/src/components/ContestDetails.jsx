@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import { getContestDetails } from '../contractIntegration';
 
 function ContestDetails() {
   const { id } = useParams();
   const [contest, setContest] = useState(null);
 
   useEffect(() => {
+    // const fetchContestDetails = async () => {
+    //   try {
+    //     const response = await axios.get(`/api/contest/${id}`);
+    //     setContest(response.data);
+    //   } catch (error) {
+    //     console.error('Error fetching contest details:', error);
+    //   }
+    // };
+
     const fetchContestDetails = async () => {
       try {
-        const response = await axios.get(`/api/contest/${id}`);
-        setContest(response.data);
+        const contestData = await getContestDetails(id);
+        setContest(contestData);
       } catch (error) {
         console.error('Error fetching contest details:', error);
       }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { createContest } from '../contractIntegration';
 
 function CreateContest() {
   const [formData, setFormData] = useState({
@@ -17,10 +18,25 @@ function CreateContest() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // try {
+    //   await axios.post('/api/createContest', formData);
+    //   alert('Contest created successfully!');
+    // } catch (error) {
+    //   console.error('Error creating contest:', error);
+    //   alert('Failed to create contest. Please try again.');
+    // }
+
     try {
-      await axios.post('/api/createContest', formData);
-      alert('Contest created successfully!');
-      // Redirect to contests list or clear form
+      const txHash = await createContest(
+        formData.metadata,
+        formData.totalReward,
+        formData.rewardThreshold,
+        formData.startTime,
+        formData.roundDuration,
+        formData.totalRounds
+      );
+      alert(`Contest created successfully! Transaction hash: ${txHash}`);
+      // Clear form or redirect
     } catch (error) {
       console.error('Error creating contest:', error);
       alert('Failed to create contest. Please try again.');

@@ -1,15 +1,25 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { participate } from '../contractIntegration';
 
 function Participate() {
   const { id } = useParams();
   const history = useHistory();
 
   const handleParticipate = async () => {
+    // try {
+    //   await axios.post(`/api/participate/${id}`);
+    //   alert('You have successfully joined the contest!');
+    //   history.push(`/contest/${id}`);
+    // } catch (error) {
+    //   console.error('Error participating in contest:', error);
+    //   alert('Failed to join the contest. Please try again.');
+    // }
+
     try {
-      await axios.post(`/api/participate/${id}`);
-      alert('You have successfully joined the contest!');
+      const txHash = await participate(id);
+      alert(`You have successfully joined the contest! Transaction hash: ${txHash}`);
       history.push(`/contest/${id}`);
     } catch (error) {
       console.error('Error participating in contest:', error);
