@@ -74,7 +74,7 @@ export function CreateCompetition() {
 
     try {
       setLoading(true);
-      // Replace with your API endpoint
+
       const response = await fetch('/api/competitions', {
         method: 'POST',
         headers: {
@@ -196,3 +196,75 @@ export function CreateCompetition() {
     </form>
   );
 }
+
+
+/**
+ * 
+ * import React, { useState } from 'react';
+import { ethers } from 'ethers';
+import { TextInput, NumberInput, DatePicker, Button, Stack } from '@mantine/core';
+
+const CreateCompetition = ({ contract }) => {
+  const [metadata, setMetadata] = useState('');
+  const [totalReward, setTotalReward] = useState(0);
+  const [rewardThreshold, setRewardThreshold] = useState(0);
+  const [startTime, setStartTime] = useState<Date | null>(null);
+  const [roundDuration, setRoundDuration] = useState(0);
+  const [totalRounds, setTotalRounds] = useState(0);
+
+  const handleCreateContest = async () => {
+    try {
+      const tx = await contract.createContest(
+        metadata,
+        ethers.utils.parseEther(totalReward.toString()),
+        rewardThreshold,
+        Math.floor(startTime?.getTime() / 1000 || 0),
+        roundDuration,
+        totalRounds
+      );
+      await tx.wait();
+      console.log('Contest created successfully');
+    } catch (error) {
+      console.error('Error creating contest:', error);
+    }
+  };
+
+  return (
+    <Stack spacing="xl">
+      <TextInput
+        label="Metadata"
+        value={metadata}
+        onChange={(e) => setMetadata(e.target.value)}
+      />
+      <NumberInput
+        label="Total Reward"
+        value={totalReward}
+        onChange={(value) => setTotalReward(value || 0)}
+      />
+      <NumberInput
+        label="Reward Threshold"
+        value={rewardThreshold}
+        onChange={(value) => setRewardThreshold(value || 0)}
+      />
+      <DatePicker
+        label="Start Time"
+        value={startTime}
+        onChange={setStartTime}
+      />
+      <NumberInput
+        label="Round Duration (seconds)"
+        value={roundDuration}
+        onChange={(value) => setRoundDuration(value || 0)}
+      />
+      <NumberInput
+        label="Total Rounds"
+        value={totalRounds}
+        onChange={(value) => setTotalRounds(value || 0)}
+      />
+      <Button onClick={handleCreateContest}>Create Contest</Button>
+    </Stack>
+  );
+};
+
+export default CreateCompetition;
+ */

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Tabs } from '@mantine/core';
-import { TableReviews } from '@/components/Competiton/Competiton';
+import { AllCompetitons } from '@/components/Competiton/Competiton';
 import { CreateCompetition } from '@/components/Competiton/CreateCompetiton';
 import { NavbarSimple } from '@/components/Navbar/NavBar';
 
@@ -25,12 +25,12 @@ export function HomePage() {
       <div style={{ flex: 1, padding: '20px' }}>
         <Tabs value={activeTab} onChange={handleTabChange}>
           <Tabs.List>
-            <Tabs.Tab value="table-reviews">Table Reviews</Tabs.Tab>
+            <Tabs.Tab value="table-reviews">All Competitons</Tabs.Tab>
             <Tabs.Tab value="create-competition">Create Competition</Tabs.Tab>
           </Tabs.List>
 
           <Tabs.Panel value="table-reviews">
-            <TableReviews />
+            <AllCompetitons />
           </Tabs.Panel>
 
           <Tabs.Panel value="create-competition">

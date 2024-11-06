@@ -1,5 +1,7 @@
 import { Table, Progress, Anchor, Text, Group } from '@mantine/core';
 import classes from './Competiton.module.css';
+import { useEffect, useState } from 'react';
+import  getContract from '../../integration/ethers.js';
 
 const data = [
   {
@@ -40,7 +42,23 @@ const data = [
   },
 ];
 
-export function TableReviews() {
+export function AllCompetitons() {
+
+
+  const [contests, setContests] = useState([]);
+
+
+  useEffect(() => {
+    async function fetchContests() {
+      const contestCount = await getContract.contests.length();
+      const allContests = await Promise.all(
+        Array.from({ length: contestCount }, (_, i) => getContract.contests(i))
+      );
+      setContests(allContests);
+    }
+    fetchContests();
+  }, [getContract]);
+
   const rows = data.map((row) => {
     const totalReviews = row.reviews.negative + row.reviews.positive;
     const positiveReviews = (row.reviews.positive / totalReviews) * 100;
