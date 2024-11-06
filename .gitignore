@@ -5,8 +5,5 @@ cache
 broadcast
 webui
 .env
-<<<<<<< HEAD
 node_modules
-=======
 *.db
->>>>>>> origin/main
