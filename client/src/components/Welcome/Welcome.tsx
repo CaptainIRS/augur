@@ -1,7 +1,17 @@
 import { Anchor, Text, Title } from '@mantine/core';
 import classes from './Welcome.module.css';
 
+import { ethers } from "ethers";
+
 export function Welcome() {
+  if ((window as any).ethereum) {
+    let provider = new ethers.BrowserProvider((window as any).ethereum)
+    provider.getSigner().then((signer) => {
+      console.log(signer);
+    });
+  } else {
+    console.log("Metamask not installed")
+  }
   return (
     <>
       <Title className={classes.title} ta="center" mt={100}>

@@ -1,0 +1,12 @@
+name: augur
+
+services:
+  functions:
+    build:
+      context: ./functions
+    ports:
+      - 8545:8545
+    env_file:
+      - .env
+    network_mode: host
+

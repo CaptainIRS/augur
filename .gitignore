@@ -1,6 +1,12 @@
 venv
+node_modules
 out
 cache
 broadcast
+webui
 .env
+<<<<<<< HEAD
 node_modules
+=======
+*.db
+>>>>>>> origin/main
