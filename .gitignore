@@ -1,5 +1,7 @@
 venv
+node_modules
 out
 cache
 broadcast
+webui
 .env

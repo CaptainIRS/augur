@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  ipfs-node-0:
+    build: .
+    ports:
+      - 8080:8080
+      - 5001:5001
+      - 4001:4001
+      - 4001:4001/udp
+    environment:
+      - IPFS_SWARM_KEY=22fe063032ff8e028095d6d30c3181086711d33dc49c5456712b2c998980b7d5
+    volumes:
+      - export-node0:/export
+      - ./webui:/webui
+      - data-node0:/data/ipfs
+
+  ipfs-node-1:
+    build: .
+    environment:
+      - IPFS_SWARM_KEY=22fe063032ff8e028095d6d30c3181086711d33dc49c5456712b2c998980b7d5
+    volumes:
+      - export-node1:/export
+      - data-node1:/data/ipfs
+
+  ipfs-node-2:
+    build: .
+    environment:
+      - IPFS_SWARM_KEY=22fe063032ff8e028095d6d30c3181086711d33dc49c5456712b2c998980b7d5
+    volumes:
+      - export-node2:/export
+      - data-node2:/data/ipfs
+
+volumes:
+  export-node0:
+  export-node1:
+  export-node2:
+  data-node0:
+  data-node1:
+  data-node2:
